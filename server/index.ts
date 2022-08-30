@@ -22,8 +22,8 @@ const noopMiddleware: RequestHandler = (_, __, next) => next();
 const authMiddleware =
   process.env.REACT_APP_SET_AUTH === 'firebase' ? require('./firebaseAuthMiddleware') : noopMiddleware;
 
-app.all('/token', authMiddleware, tokenEndpoint);
-app.all('/recordingrules', authMiddleware, recordingRulesEndpoint);
+app.all('/token', tokenEndpoint);
+app.all('/recordingrules', recordingRulesEndpoint);
 
 app.use((req, res, next) => {
   // Here we add Cache-Control headers in accordance with the create-react-app best practices.

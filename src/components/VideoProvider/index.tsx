@@ -28,6 +28,7 @@ export interface IVideoContext {
   getLocalVideoTrack: (newOptions?: CreateLocalTrackOptions) => Promise<LocalVideoTrack>;
   getLocalAudioTrack: (deviceId?: string) => Promise<LocalAudioTrack>;
   isAcquiringLocalTracks: boolean;
+  removeLocalAudioTrack: () => void;
   removeLocalVideoTrack: () => void;
   isSharingScreen: boolean;
   toggleScreenShare: () => void;
@@ -97,6 +98,7 @@ export function VideoProvider({ options, children, onError = () => {} }: VideoPr
         getLocalAudioTrack,
         connect,
         isAcquiringLocalTracks,
+        removeLocalAudioTrack,
         removeLocalVideoTrack,
         isSharingScreen,
         toggleScreenShare,
@@ -108,7 +110,7 @@ export function VideoProvider({ options, children, onError = () => {} }: VideoPr
       }}
     >
       <SelectedParticipantProvider room={room}>{children}</SelectedParticipantProvider>
-      {/* 
+      {/*
         The AttachVisibilityHandler component is using the useLocalVideoToggle hook
         which must be used within the VideoContext Provider.
       */}
